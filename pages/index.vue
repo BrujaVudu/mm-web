@@ -13,6 +13,7 @@ main
       NuxtLink(to="mailto:contacto@magicmarkersp.tv" title="Escríbenos un correo" target="_blank" class="tooltip")
         span(class="tooltiptext") Escríbenos
         img(src="/mail.svg")
+        
   // menu
       NuxtLink(to="https://youtube.com/@magicmarkerspro" title="Ver nuestros videos" target="_blank")
         img(src="/Videos.png")  
