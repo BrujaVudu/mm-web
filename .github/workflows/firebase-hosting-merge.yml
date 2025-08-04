@@ -2,15 +2,29 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
+
 on:
   push:
     branches:
       - master
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      # 1. Descarga el código del repositorio
       - uses: actions/checkout@v4
+
+      # 2. (NUEVO) Instala Node.js y las dependencias del proyecto
+      - name: Install Dependencies
+        run: npm install
+
+      # 3. (NUEVO) Compila la aplicación Nuxt para producción
+      #    Esto crea la carpeta .output/public
+      - name: Build Nuxt App
+        run: npm run build
+
+      # 4. Despliega la aplicación compilada a Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
