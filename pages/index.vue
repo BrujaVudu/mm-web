@@ -10,7 +10,7 @@ main
       NuxtLink(to="https://instagram.com/magicmarkerspro" title="Instagram Magic Markers" target="_blank" class="tooltip")
         span(class="tooltiptext") Instagram
         img(src="/ig.svg")
-      NuxtLink(to="mailto:contacto@magicmarkersp.tv" title="Escríbenos un correo" target="_blank" class="tooltip")
+      NuxtLink(to="mailto:contacto@magicmarkers.tv" title="Escríbenos un correo" target="_blank" class="tooltip")
         span(class="tooltiptext") Escríbenos
         img(src="/mail.svg")
         
