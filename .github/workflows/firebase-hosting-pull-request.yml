@@ -2,19 +2,36 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
+
 on: pull_request
+
 permissions:
   checks: write
   contents: read
   pull-requests: write
+
 jobs:
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
+      # 1. Descarga el código del repositorio
       - uses: actions/checkout@v4
+
+      # 2. (NUEVO) Instala las dependencias del proyecto
+      - name: Install Dependencies
+        run: npm install
+
+      # 3. (NUEVO) Genera la versión estática del sitio para la vista previa
+      - name: Build for Preview
+        run: npm run generate
+
+      # 4. Despliega la aplicación compilada a un canal de vista previa
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MM_LA_WEB }}
           projectId: mm-la-web
+          # Nota: No especificamos un 'channelId'. La acción es lo 
+          # suficientemente inteligente para crear uno automáticamente 
+          # para cada Pull Request.
